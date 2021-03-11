@@ -1,8 +1,11 @@
+import { authService, firebaseInst } from 'myfbase'
 import React, {useState} from 'react'
 
 const Authentication = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [newAccount, setNewAccount] = useState(true)
+    const [error,setError] = useState("")
     const onChange = (event) => {
         const {target: {name, value}} = event
         if (name === "email") {
@@ -11,19 +14,52 @@ const Authentication = () => {
             setPassword(value)
         }
     }
-    const onSubmit = (event) => {
+    const onSubmit = async(event) => {
         event.preventDefault()
+        try {
+            let data
+            if (newAccount) {
+                data = await authService.createUserWithEmailAndPassword(
+                    email, password
+                )
+            } else {
+                data = await authService.signInWithEmailAndPassword(
+                    email, password
+                )
+            }
+            console.log(data)
+        } catch(error) {
+            setError(error.message)
+        }
+    }
+
+    const toggleAccount = () =>{
+        setNewAccount((prev) => !prev)
+    }
+
+    const onSocialClick = async(event) => {
+        const {target:{name}} = (event)
+        let provider
+        if (name === "Google") {
+            provider = new firebaseInst.auth.GoogleAuthProvider()
+        } else if (name ==="Github") {
+            provider = new firebaseInst.auth.GithubAuthProvider()
+        }
+        const data = await authService.signInWithPopup(provider)
+        console.log(data)
     }
     return (
     <div>
-        <form>
-            <input name= "email" type= "text" placeholder="email" required value={email} onChange= {onChange}/>
+        <form onSubmit={onSubmit}>
+            <input name= "email" type= "email" placeholder="email" required value={email} onChange= {onChange}/>
             <input name= "password" type= "password" placeholder= "Password" required value={password} onChange= {onChange}/>
-            <input type="submit" value="Log In"/> 
+            <input type="submit" value= {newAccount ? "Create Account" : "Log In"}/>
+            {error}
         </form>
+        <span onClick={toggleAccount}>{newAccount ? "Log In" : "Create Account"}</span>
         <div>
-            <button>Continue with Google</button>
-            <button>Continue with Github</button>
+            <button onClick = {onSocialClick} name="Google">Continue with Google</button>
+            <button onClick = {onSocialClick} name="Github">Continue with Github</button>
         </div>
     </div>
     )
