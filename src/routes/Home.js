@@ -1,27 +1,26 @@
 import { dbService } from "myfbase"
 import React, {useState, useEffect} from 'react'
+import Twittwit from "components/Twittwit"
 
-const Home = () => {
+const Home = ({userObj}) => {
     const [twit, setTwit] = useState("")
     const [existTwits, setExistTwits] = useState([])
-    const getTwits = async() => {
-        const twits = await dbService.collection("twits").get()
-        twits.forEach((document) => {
-            const twitObj = {
-                ...document.data(),
-                id: document.id,
-            }
-            setExistTwits((prev) => [twitObj, ...prev])
-        })
-    }
     useEffect (() =>{
-        getTwits()
-    }, [])
+        dbService.collection("twits").onSnapshot(snapshot => {
+            const twitArray = snapshot.docs.map(doc => ({
+                id:doc.id,
+                ...doc.data(),
+            }))
+            setExistTwits(twitArray)
+         })
+    }, []);
+
     const onSubmit = async(event) => {
         event.preventDefault()
         await dbService.collection("twits").add({
-            twit,
-            createdAt: Date.now()
+            text : twit,
+            createdAt: Date.now(),
+            creatorId : userObj.uid
         })
         console.log("update")
         setTwit("")
@@ -40,12 +39,12 @@ const Home = () => {
             <input type="submit" value="Twit"/>
         </form>
         <div>
-            {existTwits.map(twit => 
-            <div key={twit.id}>
-                <h4>{twit.twit}</h4>
-            </div>)}
+            {existTwits.map(twit => (
+            <Twittwit key={twit.id} twitObj = {twit} isMaster = {twit.creatorId === userObj.uid}/>
+            ))}
         </div>
     </div>
    )
 }
+
 export default Home
