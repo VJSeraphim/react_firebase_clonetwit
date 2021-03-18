@@ -1,4 +1,5 @@
-import { dbService } from "myfbase"
+import { dbService, storageService } from "myfbase"
+import {v4 as uuidv4} from "uuid"
 import React, {useState, useEffect} from 'react'
 import Twittwit from "components/Twittwit"
 
@@ -18,13 +19,14 @@ const Home = ({userObj}) => {
 
     const onSubmit = async(event) => {
         event.preventDefault()
-        await dbService.collection("twits").add({
+        const fileReference = storageService.ref().child(`${userObj.uid}/${uuidv4()}`)
+        const fileResponse = await fileReference.putString(attachment, "data_url")
+        /* await dbService.collection("twits").add({
             text : twit,
             createdAt: Date.now(),
             creatorId : userObj.uid
         })
-        console.log("update")
-        setTwit("")
+        setTwit("") */
     }
 
     const onChange = (event) => {
