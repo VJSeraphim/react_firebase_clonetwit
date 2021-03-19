@@ -40,6 +40,7 @@ const Twittwit = ({twitObj, isMaster}) => {
                 ) : ( 
                     <>
                         <h4>{twitObj.text}</h4>
+                            {twitObj.attachmentUrl && <img src={twitObj.attachmentUrl} width="100px" height="100px"/>}
                             {isMaster && (
                             <>
                                 <button onClick={onDeleteClick}>Delete Twit</button>

@@ -21,12 +21,16 @@ const Home = ({userObj}) => {
         event.preventDefault()
         const fileReference = storageService.ref().child(`${userObj.uid}/${uuidv4()}`)
         const fileResponse = await fileReference.putString(attachment, "data_url")
-        /* await dbService.collection("twits").add({
+        const attachmentUrl = await fileResponse.ref.getDownloadURL()
+        const twitObjs = {
             text : twit,
             createdAt: Date.now(),
-            creatorId : userObj.uid
-        })
-        setTwit("") */
+            creatorId : userObj.uid,
+            attachmentUrl
+        }
+        await dbService.collection("twits").add(twitObjs)
+        setTwit("")
+        setAttachment("")
     }
 
     const onChange = (event) => {
