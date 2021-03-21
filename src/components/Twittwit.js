@@ -1,4 +1,4 @@
-import { dbService } from "myfbase"
+import { dbService, storageService } from "myfbase"
 import React, { useState } from "react"
 
 const Twittwit = ({twitObj, isMaster}) => {
@@ -9,6 +9,9 @@ const Twittwit = ({twitObj, isMaster}) => {
         console.log(ok)
         if (ok) {
            await dbService.doc(`twits/${twitObj.id}`).delete()
+           if (twitObj.attachmentUrl !== "") {
+               await storageService.refFromURL(twitObj.attachmentUrl).delete()
+           }
         }
     }
 

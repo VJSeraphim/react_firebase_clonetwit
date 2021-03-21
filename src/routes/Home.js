@@ -6,7 +6,7 @@ import Twittwit from "components/Twittwit"
 const Home = ({userObj}) => {
     const [twit, setTwit] = useState("")
     const [existTwits, setExistTwits] = useState([])
-    const [attachment, setAttachment] = useState()
+    const [attachment, setAttachment] = useState("")
     useEffect (() =>{
         dbService.collection("twits").onSnapshot(snapshot => {
             const twitArray = snapshot.docs.map(doc => ({
@@ -19,9 +19,12 @@ const Home = ({userObj}) => {
 
     const onSubmit = async(event) => {
         event.preventDefault()
-        const fileReference = storageService.ref().child(`${userObj.uid}/${uuidv4()}`)
-        const fileResponse = await fileReference.putString(attachment, "data_url")
-        const attachmentUrl = await fileResponse.ref.getDownloadURL()
+        let attachmentUrl = ""
+        if (attachment !== "") {
+            const fileReference = storageService.ref().child(`${userObj.uid}/${uuidv4()}`)
+            const fileResponse = await fileReference.putString(attachment, "data_url")
+            attachmentUrl = await fileResponse.ref.getDownloadURL()
+        }
         const twitObjs = {
             text : twit,
             createdAt: Date.now(),
