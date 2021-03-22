@@ -8,7 +8,7 @@ import Profile from "routes/Profile"
 const RouterCode = ({ isLoggedIn , userObj }) => {
     return (
         <Router>
-            {isLoggedIn && <Nav />}
+            {isLoggedIn && <Nav userObj = {userObj}/>}
             <Switch>
                 {isLoggedIn ? 
                 <>
@@ -16,7 +16,7 @@ const RouterCode = ({ isLoggedIn , userObj }) => {
                     <Home userObj = {userObj}/>
                 </Route>
                 <Route exact path="/profile">
-                    <Profile/>
+                    <Profile userObj = {userObj}/>
                 </Route>
                 </> : <>
                 <Route exact path="/">

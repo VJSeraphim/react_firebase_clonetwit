@@ -1,21 +1,46 @@
-import { authService, dbService } from 'myfbase'
+import { authService /*, dbService*/ } from "myfbase"
 import {useHistory} from "react-router-dom"
-import React, { useEffect } from 'react'
+import React, { /*useEffect,*/ useState } from "react"
 
 export default ({ userObj }) => { 
     const history = useHistory()
+    const [newDisplayer, setNewDisplayer] = useState(userObj.displayName)
     const onLogOutClick = () => {
         authService.signOut()
         history.push("/")
     }
-    const getMyTwits = async() => {
-        const twits = await dbService.collection("twits").where("creatorId", "==", userObj.uid)
+    /* const getMyTwits = async() => {
+        const twits = await dbService.collection("twits").where("creatorId", "==", userObj.uid).orderBy("createdAt").get() // Needs Index (noSQL DB)
         console.log(twits.docs.map((doc) => doc.data()))
+    } */
+
+    const onChange = (event) => {
+        const {
+            target: {value},
+        } =event
+        setNewDisplayer(value)
     }
-    useEffect(() =>{
+
+    const onSubmit = async (event) => {
+        event.preventDefault()
+        if (userObj.displayName !== "newDisplayer") {
+            await userObj.updateProfile({
+                displayName : newDisplayer
+            })
+        }
+    }
+
+    /* useEffect(() =>{
         getMyTwits()
-    }, [])
+    }, []) */
+
     return (
-        <button onClick={onLogOutClick}>Log Out</button> 
+        <>
+            <form onSubmit={onSubmit}>
+                <input type="text" placeholder="Display Name" onChange={onChange} value={newDisplayer}/>
+                <input type="submit" value="Update Profile" />
+            </form>
+            <button onClick={onLogOutClick}>Log Out</button> 
+        </>
     )
 }
