@@ -8,16 +8,31 @@ function App() {
   useEffect(() => {
     authService.onAuthStateChanged((user) =>{
       if (user) {
+        /* 
         setUserObj(user)
+        */
+        setUserObj({
+          displayName:user.displayName,
+          uid:user.uid,
+          updateProfile: (args) => user.updateProfile(args)
+        })
       } else if (null) {
         setUserObj(null)
       }
       setInit(true)
     })
   }, [])
+  const userRefresh = () => {
+    const user = authService.currentUser
+    setUserObj(/*Object.assign({}, user)*/{
+      displayName:user.displayName,
+      uid:user.uid,
+      updateProfile: (args) => user.updateProfile(args)
+    })
+  } //Update Profile : refreshes user in the firebase, but Nav is not connected to the FB
   return (
     <>
-    {init ? <RouterCode isLoggedIn = {Boolean(userObj)} userObj = {userObj}/>: "Initializing Process Ongoing."}
+    {init ? <RouterCode userRefresh = {userRefresh} isLoggedIn = {Boolean(userObj)} userObj = {userObj}/>: "Initializing Process Ongoing."}
     <footer>&copy; TwitClone, {new Date().getFullYear()}</footer>
     </>
   );

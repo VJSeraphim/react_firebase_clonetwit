@@ -2,11 +2,12 @@ import { authService /*, dbService*/ } from "myfbase"
 import {useHistory} from "react-router-dom"
 import React, { /*useEffect,*/ useState } from "react"
 
-export default ({ userObj }) => { 
+export default ({ userRefresh, userObj }) => { 
     const history = useHistory()
     const [newDisplayer, setNewDisplayer] = useState(userObj.displayName)
     const onLogOutClick = () => {
         authService.signOut()
+        aythService.currentUser.uid
         history.push("/")
     }
     /* const getMyTwits = async() => {
@@ -27,6 +28,7 @@ export default ({ userObj }) => {
             await userObj.updateProfile({
                 displayName : newDisplayer
             })
+            userRefresh()
         }
     }
 

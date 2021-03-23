@@ -5,7 +5,7 @@ import Home from "../routes/Home"
 import Nav from "components/Nav"
 import Profile from "routes/Profile"
 
-const RouterCode = ({ isLoggedIn , userObj }) => {
+const RouterCode = ({ userRefresh, isLoggedIn , userObj }) => {
     return (
         <Router>
             {isLoggedIn && <Nav userObj = {userObj}/>}
@@ -16,7 +16,7 @@ const RouterCode = ({ isLoggedIn , userObj }) => {
                     <Home userObj = {userObj}/>
                 </Route>
                 <Route exact path="/profile">
-                    <Profile userObj = {userObj}/>
+                    <Profile userObj = {userObj} userRefresh = {userRefresh}/>
                 </Route>
                 </> : <>
                 <Route exact path="/">
