@@ -7,7 +7,6 @@ export default ({ userRefresh, userObj }) => {
     const [newDisplayer, setNewDisplayer] = useState(userObj.displayName)
     const onLogOutClick = () => {
         authService.signOut()
-        aythService.currentUser.uid
         history.push("/")
     }
     /* const getMyTwits = async() => {
