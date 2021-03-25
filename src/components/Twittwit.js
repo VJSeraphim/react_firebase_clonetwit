@@ -1,5 +1,7 @@
 import { dbService, storageService } from "myfbase"
 import React, { useState } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {faTrash, faPencilAlt} from "@fortawesome/free-solid-svg-icons"
 
 const Twittwit = ({twitObj, isMaster}) => {
     const [editTwit, setEditTwit] = useState(false)
@@ -30,25 +32,31 @@ const Twittwit = ({twitObj, isMaster}) => {
         setNewTwit(value)
     }    
     return (
-        <div>
+        <div className= "twit">
             {
                 editTwit ? (
                 <>
-                    <form onSubmit = {onSubmit}>
-                        <input type="text" placeholder="Edit your Twit" value={newTwit} required onChange={onChange}/>
-                        <input type="submit" value="Update Twit"/>
+                    <form onSubmit = {onSubmit} className="container twitEdit">
+                        <input type="text" placeholder="Edit your Twit" value={newTwit} required autoFocus onChange={onChange} className="formInput"/>
+                        <input type="submit" value="Update Twit" className="formBtn"/>
                     </form>
-                    <button onClick = {triggerEdit}> Cancel </button>
+                    <span onClick = {triggerEdit} className="formBtn cancelBtn">
+                        Cancel 
+                    </span>
                 </>
                 ) : ( 
                     <>
                         <h4>{twitObj.text}</h4>
-                            {twitObj.attachmentUrl && <img src={twitObj.attachmentUrl} width="100px" height="100px"/>}
+                            {twitObj.attachmentUrl && <img src={twitObj.attachmentUrl}/>}
                             {isMaster && (
-                            <>
-                                <button onClick={onDeleteClick}>Delete Twit</button>
-                                <button onClick={triggerEdit}>Edit Twit</button>
-                            </>
+                            <div class="twit__actions">
+                                <span onClick={onDeleteClick}>
+                                    <FontAwesomeIcon icon={faTrash} />
+                                </span>
+                                <span onClick={toggleEditing}>
+                                    <FontAwesomeIcon icon={faPencilAlt} />
+                                </span>
+                          </div>
                         )}
                     </>
                 )}

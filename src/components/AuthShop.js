@@ -40,13 +40,13 @@ const AuthShop = () => {
 
     return (
         <>
-            <form onSubmit={onSubmit}>
-                <input name= "email" type= "email" placeholder="email" required value={email} onChange= {onChange}/>
-                <input name= "password" type= "password" placeholder= "Password" required value={password} onChange= {onChange}/>
-                <input type="submit" value= {newAccount ? "Create Account" : "Log In"}/>
-                {error}
+            <form onSubmit={onSubmit} className="container">
+                <input name= "email" type= "email" placeholder="email" required value={email} onChange= {onChange} className="authInput"/>
+                <input name= "password" type= "password" placeholder= "Password" required value={password} onChange={onChange} className = "authInput"/>
+                <input type="submit" className = "authInput authSubmit" value= {newAccount ? "Create Account" : "Log In"}/>
+                {error && <span className="authError">{error}</span>}
             </form>
-            <span onClick={toggleAccount}>{newAccount ? "Log In" : "Create Account"}</span>
+            <span onClick={toggleAccount} className = "authSwitch">{newAccount ? "Log In" : "Create Account"}</span>
         </>
     )
 }
