@@ -17,11 +17,13 @@ const Home = ({userObj}) => {
 
    return (
 
-        <div>
+        <div className="container">
             <TwitShop userObj = {userObj} />
-            {existTwits.map(twit => (
-            <Twittwit key={twit.id} twitObj = {twit} isMaster = {twit.creatorId === userObj.uid}/>
-            ))}
+            <div style={{marginTop:30}}>
+                {existTwits.map(twit => (
+                <Twittwit key={twit.id} twitObj = {twit} isMaster = {twit.creatorId === userObj.uid}/>
+                ))}
+            </div>
         </div>
 
    )

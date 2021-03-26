@@ -53,7 +53,7 @@ const Twittwit = ({twitObj, isMaster}) => {
                                 <span onClick={onDeleteClick}>
                                     <FontAwesomeIcon icon={faTrash} />
                                 </span>
-                                <span onClick={toggleEditing}>
+                                <span onClick={triggerEdit}>
                                     <FontAwesomeIcon icon={faPencilAlt} />
                                 </span>
                           </div>

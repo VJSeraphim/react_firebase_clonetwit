@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import { v4 as uuidv4 } from "uuid"
 import {storageService, dbService} from "myfbase"
-import {FontAwseomeIcon} from "@fortawesome/react-fontawesome"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faPlus, faTimes} from "@fortawesome/free-solid-svg-icons"
 
 const TwitShop = ({userObj}) => {
@@ -51,7 +51,7 @@ const TwitShop = ({userObj}) => {
     return (
         <form onSubmit={onSubmit} className="shopForm">
             <div className="shopInput__container">
-                <input className="shopInput__input" value={nweet} onChange={onChange} type="text" placeholder="What's on your mind?" maxLength={120}/>
+                <input className="shopInput__input" value={twit} onChange={onChange} type="text" placeholder="What's on your mind?" maxLength={120}/>
                 <input type="submit" value="&rarr;" className="shopInput__arrow" />
             </div>
         <label for="attach-file" className="shopInput__label">
@@ -62,7 +62,7 @@ const TwitShop = ({userObj}) => {
             {attachment && (
                 <div className="shopForm__attachment">
                     <img src={attachment} style={{ backgroundImage: attachment }}/>
-                    <div className="shopForm__clear" onClick={onClearAttachment}>
+                    <div className="shopForm__clear" onClick={onClearAttachClick}>
                         <span>Remove</span>
                         <FontAwesomeIcon icon={faTimes} />
                     </div>

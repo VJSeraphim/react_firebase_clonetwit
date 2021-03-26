@@ -1,5 +1,7 @@
 import React from "react"
 import { authService, firebaseInst } from 'myfbase'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import { faGoogle, faGithub} from "@fortawesome/free-brands-svg-icons"
 
 const AuthSocial = () => {
 
@@ -14,10 +16,12 @@ const AuthSocial = () => {
         await authService.signInWithPopup(provider)
     }
     return (
-        <>
-            <button onClick = {onSocialClick} name="Google">Continue with Google</button>
-            <button onClick = {onSocialClick} name="Github">Continue with Github</button>
-        </>
+        <div className ="authBtns">
+            <>
+                <button onClick = {onSocialClick} name="Google" className="authBtn">Continue with Google <FontAwesomeIcon icon={faGoogle} /></button>
+                <button onClick = {onSocialClick} name="Github" className="authBtn">Continue with Github <FontAwesomeIcon icon={faGithub} /></button>
+            </>
+        </div>
     )
 }
 
