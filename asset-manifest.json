@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/github.io/VJSeraphim/react_firebase_clonetwit/static/css/main.439b384b.chunk.css",
+    "main.js": "/github.io/VJSeraphim/react_firebase_clonetwit/static/js/main.ef205e6c.chunk.js",
+    "main.js.map": "/github.io/VJSeraphim/react_firebase_clonetwit/static/js/main.ef205e6c.chunk.js.map",
+    "runtime-main.js": "/github.io/VJSeraphim/react_firebase_clonetwit/static/js/runtime-main.44d0400e.js",
+    "runtime-main.js.map": "/github.io/VJSeraphim/react_firebase_clonetwit/static/js/runtime-main.44d0400e.js.map",
+    "static/js/2.70e98d8b.chunk.js": "/github.io/VJSeraphim/react_firebase_clonetwit/static/js/2.70e98d8b.chunk.js",
+    "static/js/2.70e98d8b.chunk.js.map": "/github.io/VJSeraphim/react_firebase_clonetwit/static/js/2.70e98d8b.chunk.js.map",
+    "index.html": "/github.io/VJSeraphim/react_firebase_clonetwit/index.html",
+    "static/css/main.439b384b.chunk.css.map": "/github.io/VJSeraphim/react_firebase_clonetwit/static/css/main.439b384b.chunk.css.map",
+    "static/js/2.70e98d8b.chunk.js.LICENSE.txt": "/github.io/VJSeraphim/react_firebase_clonetwit/static/js/2.70e98d8b.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.44d0400e.js",
+    "static/js/2.70e98d8b.chunk.js",
+    "static/css/main.439b384b.chunk.css",
+    "static/js/main.ef205e6c.chunk.js"
+  ]
+}
