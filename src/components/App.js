@@ -33,7 +33,7 @@ function App() {
   return (
     <>
     {init ? <RouterCode userRefresh = {userRefresh} isLoggedIn = {Boolean(userObj)} userObj = {userObj}/>: "Initializing Process Ongoing."}
-    <footer>&copy; TwitClone, {new Date().getFullYear()}</footer>
+    <footer className="twitFooter">&copy; TwitClone, {new Date().getFullYear()}</footer>
     </>
   );
 }
